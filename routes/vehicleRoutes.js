@@ -30,4 +30,21 @@ router.get('/vehicles', async (req, res) => {
   }
 });
 
+router.get('/vehicle-models', async (req, res) => {
+  const { typeId } = req.query;
+  if (!typeId) {
+    return res.status(400).json({ message: 'typeId is required' });
+  }
+
+  try {
+    const models = await Vehicle.findAll({
+      where: { VehicleTypeId: typeId },
+    });
+    res.json(models);
+  } catch (error) {
+    console.error('Error fetching vehicle models:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;

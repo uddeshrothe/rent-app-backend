@@ -3,6 +3,14 @@ module.exports = (sequelize, DataTypes) => {
     model: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
+    VehicleTypeId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'VehicleTypes', 
+        key: 'id',
+      },
+    },
   });
 };
